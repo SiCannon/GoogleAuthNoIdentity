@@ -19,6 +19,7 @@ namespace ExtAuthNoIdentity
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("client_secret.json", optional: false)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -62,8 +63,8 @@ namespace ExtAuthNoIdentity
 
             app.UseGoogleAuthentication(new GoogleOptions()
             {
-                ClientId = Configuration["Authentication:Google:ClientId"],
-                ClientSecret = Configuration["Authentication:Google:ClientSecret"],
+                ClientId = Configuration["web:client_id"],
+                ClientSecret = Configuration["web:client_secret"],
                 SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme
             });
 

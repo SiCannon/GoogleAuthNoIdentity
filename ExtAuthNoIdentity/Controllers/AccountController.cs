@@ -26,9 +26,27 @@ namespace ExtAuthNoIdentity.Controllers
             return Challenge(properties, "Google");
         }
 
-        public ActionResult ExternalLoginCallback(string returnUrl)
+        public IActionResult ExternalLoginCallback(string returnUrl)
         {
+            var x = HttpContext.User;
+
+            foreach (var c in x.Claims)
+            {
+                if (c.Type == "Email")
+                {
+                    string email = c.Value;
+                }
+            }
+            
             return new RedirectResult(returnUrl);
         }
+
+        //public async Task<IActionResult> ExternalLoginCallback(string returnUrl)
+        //{
+        //    HttpContext.User.
+
+
+        //    return new RedirectResult(returnUrl);
+        //}
     }
 }
