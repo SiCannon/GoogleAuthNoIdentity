@@ -17,6 +17,14 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
+
+    @{
+        string usernameText = "not signed in";
+        if (Context.User != null && Context.User.Identity.IsAuthenticated)
+        {
+            usernameText = $"signed in as {Context.User.Identity.Name}";
+        }
+    }
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -36,6 +44,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Secure">Secure</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
                 </ul>
+                <p class="navbar-text navbar-right">@usernameText</p>
             </div>
         </div>
     </nav>
