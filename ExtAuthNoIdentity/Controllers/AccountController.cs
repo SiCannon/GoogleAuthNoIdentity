@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,12 @@ namespace ExtAuthNoIdentity.Controllers
             }
             
             return new RedirectResult(returnUrl);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
 
         //public async Task<IActionResult> ExternalLoginCallback(string returnUrl)
