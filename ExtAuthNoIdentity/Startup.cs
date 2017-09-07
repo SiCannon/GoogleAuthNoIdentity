@@ -56,7 +56,8 @@ namespace ExtAuthNoIdentity
                 AuthenticationScheme = CookieAuthenticationDefaults.AuthenticationScheme,
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                LoginPath = "/Account/Login/"
+                LoginPath = "/Account/Login/",
+                CookieName = "Kong"
             });
 
             app.UseGoogleAuthentication(new GoogleOptions()

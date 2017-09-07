@@ -18,7 +18,11 @@ namespace ExtAuthNoIdentity.Controllers
         public IActionResult ExternalLogin(string returnUrl = null)
         {
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
-            var properties = new AuthenticationProperties() { RedirectUri = redirectUrl };
+            var properties = new AuthenticationProperties()
+            {
+                RedirectUri = redirectUrl,
+                IsPersistent = true
+            };
             return Challenge(properties, "Google");
         }
 
