@@ -1,13 +1,11 @@
 <h2>Login</h2>
 
-<form asp-controller="Account" asp-action="ExternalLoginGoogle" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <div>
-        <button type="submit" class="btn btn-default" name="provider">Log in using Google</button>
-    </div>
+<form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+    <input name="provider" value="g" type="hidden">
+    <button type="submit" class="btn btn-default">Log in using Google</button>
 </form>
 
-<form asp-controller="Account" asp-action="ExternalLoginMicrosoft" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <div>
-        <button type="submit" class="btn btn-default" name="provider">Log in using Microsoft</button>
-    </div>
+<form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+    <input name="provider" value="ms" type="hidden">
+    <button type="submit" class="btn btn-default">Log in using Microsoft</button>
 </form>

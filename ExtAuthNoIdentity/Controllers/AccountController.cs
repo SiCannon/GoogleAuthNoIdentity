@@ -16,7 +16,7 @@ namespace ExtAuthNoIdentity.Controllers
             return View();
         }
 
-        public IActionResult ExternalLoginGoogle(string returnUrl = null)
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
             var properties = new AuthenticationProperties()
@@ -24,18 +24,13 @@ namespace ExtAuthNoIdentity.Controllers
                 RedirectUri = redirectUrl,
                 IsPersistent = true
             };
-            return Challenge(properties, "Google");
-        }
 
-        public IActionResult ExternalLoginMicrosoft(string returnUrl = null)
-        {
-            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
-            var properties = new AuthenticationProperties()
-            {
-                RedirectUri = redirectUrl,
-                IsPersistent = true
-            };
-            return Challenge(properties, "Microsoft");
+            string scheme =
+                provider == "g" ? "Google" :
+                provider == "ms" ? "Microsoft" :
+                throw new Exception($"Provider {provider} not recognized");
+
+            return Challenge(properties, scheme);
         }
 
         public IActionResult ExternalLoginCallback(string returnUrl)
@@ -49,7 +44,7 @@ namespace ExtAuthNoIdentity.Controllers
                     string email = c.Value;
                 }
             }
-            
+
             return new RedirectResult(returnUrl);
         }
 

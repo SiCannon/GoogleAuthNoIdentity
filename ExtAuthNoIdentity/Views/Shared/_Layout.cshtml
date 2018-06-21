@@ -22,7 +22,7 @@
         string usernameText = "not signed in";
         if (Context.User != null && Context.User.Identity.IsAuthenticated)
         {
-            usernameText = $"signed in as {Context.User.Identity.Name}";
+            usernameText = $"signed in as {Context.User.Identity.Name} for {Context.User.Identity.AuthenticationType}";
         }
     }
 </head>
