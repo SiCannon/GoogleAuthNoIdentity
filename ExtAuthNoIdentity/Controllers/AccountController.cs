@@ -16,7 +16,7 @@ namespace ExtAuthNoIdentity.Controllers
             return View();
         }
 
-        public IActionResult ExternalLogin(string returnUrl = null)
+        public IActionResult ExternalLoginGoogle(string returnUrl = null)
         {
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
             var properties = new AuthenticationProperties()
@@ -25,6 +25,17 @@ namespace ExtAuthNoIdentity.Controllers
                 IsPersistent = true
             };
             return Challenge(properties, "Google");
+        }
+
+        public IActionResult ExternalLoginMicrosoft(string returnUrl = null)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+            var properties = new AuthenticationProperties()
+            {
+                RedirectUri = redirectUrl,
+                IsPersistent = true
+            };
+            return Challenge(properties, "Microsoft");
         }
 
         public IActionResult ExternalLoginCallback(string returnUrl)

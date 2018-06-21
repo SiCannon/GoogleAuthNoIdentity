@@ -68,6 +68,13 @@ namespace ExtAuthNoIdentity
                 SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme
             });
 
+            app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
+            {
+                ClientId = Configuration["ms:app_id"],
+                ClientSecret = Configuration["ms:app_pw"],
+                SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

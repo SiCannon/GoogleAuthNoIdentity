@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /ExtAuthNoIdentity/client_secret.json
+.vscode/
